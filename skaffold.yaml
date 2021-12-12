@@ -4,15 +4,9 @@ metadata:
   name: kubernetes-livereload-article
 build:
   tagPolicy:
-    customTemplate:
-      template: "{{.GIT}}-{{.DATE}}"
-      components:
-        - name: GIT
-          gitCommit: { }
-        - name: DATE
-          dateTime:
-            format: 2006-01-02_15-04-05
-            timezone: UTC
+    dateTime:
+      format: 2006-01-02_15-04-05
+      timezone: UTC
   artifacts:
     - image: kubernetes-spring-example
       jib: { }
