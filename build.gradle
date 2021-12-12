@@ -1,0 +1,38 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id("com.google.cloud.tools.jib") version "3.1.4"
+    id 'java'
+}
+
+group = 'com.zlrx.k8s'
+version = '1.0.0'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}
+
+jib {
+    from {
+        image = 'openjdk:17.0.1-slim'
+    }
+    to {
+        image = 'zalerix/kubernetes-spring-example'
+        tags = ['latest', project.version]
+    }
+    container {
+        mainClass = 'com.zlrx.k8s.kuberneteslivereloadarticle.MainApplication'
+        ports = ['8080/tcp', '9000/tcp']
+        appRoot = '/app'
+        workingDirectory = '/app'
+        creationTime = 'USE_CURRENT_TIMESTAMP'
+        environment = [
+                'JAVA_TOOL_OPTIONS': '-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n'
+        ]
+    }
+}
