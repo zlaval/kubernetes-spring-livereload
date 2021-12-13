@@ -11,10 +11,6 @@ build:
     - image: kubernetes-spring-example
       jib: { }
 deploy:
-  kubectl:
-    manifests:
-      - deployment.yaml
-portForward:
-  - resourceType: service
-    resourceName: client-port
-    port: 8080
+  kustomize:
+    paths:
+      - deployment/overlays/dev
