@@ -11,3 +11,28 @@ configMapGenerator:
 
 resources:
   - ../../base
+
+
+patchesJson6902:
+  - target:
+      group: apps
+      kind: Deployment
+      name: k8s-app-deployment
+      version: v1
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/ports/1
+        value:
+          {
+            containerPort: 5005,
+            name: debug-port
+          }
+
+  - target:
+      kind: Service
+      name: client-port
+      version: v1
+    patch: |-
+      - op: add
+        path: /spec/ports/1
+        value: {port: 5005, targetPort: 5005, nodePort: 30005, name: debug-port}

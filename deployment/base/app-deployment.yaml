@@ -39,6 +39,7 @@ spec:
               memory: "128Mi"
           ports:
             - containerPort: 8080
+              name: app-port
           volumeMounts:
             - mountPath: /app/config
               name: config-volume
