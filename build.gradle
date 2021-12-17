@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.zlrx.k8s'
-version = '2.0.0'
+version = '3.0.0'
 sourceCompatibility = '17'
 
 repositories {
