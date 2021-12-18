@@ -9,9 +9,11 @@ configMapGenerator:
     files:
       - configs/application.yaml
 
+components:
+  - ../../components/postgres
+
 resources:
   - ../../base
-
 
 patchesJson6902:
   - target:
